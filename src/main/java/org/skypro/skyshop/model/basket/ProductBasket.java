@@ -15,7 +15,7 @@ public class ProductBasket {
         System.out.println("Продукт добавлен в вашу корзину");
     }
 
-    public Map<UUID, Integer> printBasket() {
+    public Map<UUID, Integer> getBasket() {
         return Collections.unmodifiableMap(basket);
     }
 }

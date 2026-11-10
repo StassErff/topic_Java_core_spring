@@ -84,4 +84,8 @@ public class StorageService {
         Article articleCakes = new Article(artCakesId, "Cake", "Cakes are small masterpieces of the confectioner’s art");
         articleMap.put(artCakesId, articleCakes);
     }
+
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(productMap.get(id));
+    }
 }

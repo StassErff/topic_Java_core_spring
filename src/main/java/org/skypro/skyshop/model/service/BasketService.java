@@ -5,7 +5,6 @@ import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -27,7 +26,6 @@ public class BasketService {
         basket.addToBasket(id);
     }
 
-    @GetMapping("/basket")
     public UserBasket getUserBasket() {
         ArrayList<BasketItem> items = basket.getBasket().entrySet().stream()
                 .map(m -> new BasketItem(service.getProductById(m.getKey())

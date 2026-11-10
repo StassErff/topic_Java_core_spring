@@ -11,7 +11,7 @@ public class ProductBasket {
     private final Map<UUID, Integer> basket = new HashMap<>();
 
     public void addToBasket(UUID id) {
-        basket.computeIfAbsent(id, k -> basket.merge(id,1, Integer::sum));
+        basket.merge(id,1, Integer::sum);
         System.out.println("Продукт добавлен в вашу корзину");
     }
 

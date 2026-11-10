@@ -1,25 +1,21 @@
 package org.skypro.skyshop.model.basket;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class UserBasket {
-    private final ArrayList<BasketItem> basketItems;
-    private int total;
+    private final List<BasketItem> basketItems;
+    private final int total;
 
     public UserBasket(ArrayList<BasketItem> basketItems) {
-        this.basketItems = basketItems;
+        this.basketItems = basketItems != null ? Collections.unmodifiableList(new ArrayList<>(basketItems)) : Collections.emptyList();
+        this.total = this.basketItems.stream()
+                .mapToInt(item -> item.getProduct().getPrice() * item.getAmountProduct())
+                .sum();
     }
 
-    public ArrayList<BasketItem> getBasketItems() {
+    public List<BasketItem> getBasketItems() {
         return basketItems;
-    }
-
-    @GetMapping
-    public int getTotal(int amount) {
-        this.total += total * amount;
-        // Надо ли написать sout "Стоимость вашей корзины"?
-        return this.total;
     }
 }

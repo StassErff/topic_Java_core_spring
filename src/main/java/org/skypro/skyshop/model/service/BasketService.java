@@ -3,6 +3,7 @@ package org.skypro.skyshop.model.service;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
+import org.skypro.skyshop.model.error.NoSuchProductException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +23,14 @@ public class BasketService {
     }
 
     public void addToIdBasket(UUID id) {
-        service.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Товар с ID " + id + " не найден"));
+        service.getProductById(id).orElseThrow(() -> new NoSuchProductException("Товар с ID " + id + " не найден"));
         basket.addToBasket(id);
     }
 
     public UserBasket getUserBasket() {
         ArrayList<BasketItem> items = basket.getBasket().entrySet().stream()
                 .map(m -> new BasketItem(service.getProductById(m.getKey())
-                        .orElseThrow(() -> new IllegalArgumentException("Product not found for ID: " + m.getKey())), m.getValue()))
+                        .orElseThrow(() -> new NoSuchProductException("Product not found for ID: " + m.getKey())), m.getValue()))
                 .collect(Collectors.toCollection(ArrayList::new));
         return new UserBasket(items);
     }

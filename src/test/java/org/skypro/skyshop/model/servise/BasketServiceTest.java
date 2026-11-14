@@ -45,7 +45,7 @@ public class BasketServiceTest {
     @Test
     public void addExistingProductCallsAddProductOnBasket() {
         UUID productId = UUID.randomUUID();
-        Product product = new SimpleProduct(productId, "Хлеб", 50);
+        Product product = new SimpleProduct(productId, "хлеб", 50);
         when(storageService.getProductById(productId)).thenReturn(Optional.of(product));
 
         basketService.addToIdBasket(productId);
@@ -66,7 +66,7 @@ public class BasketServiceTest {
     @Test
     public void getUserBasketReturnsPopulatedBasketWhenProductsExist() {
         UUID productId = UUID.randomUUID();
-        Product product = new SimpleProduct(productId, "Молоко", 100);
+        Product product = new SimpleProduct(productId, "молоко", 100);
 
         when(productBasket.getBasket()).thenReturn(Map.of(productId, 2));
         when(storageService.getProductById(productId)).thenReturn(Optional.of(product));

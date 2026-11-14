@@ -18,4 +18,8 @@ public class UserBasket {
     public List<BasketItem> getBasketItems() {
         return basketItems;
     }
+
+    public int getTotal() {
+        return total;
+    }
 }
